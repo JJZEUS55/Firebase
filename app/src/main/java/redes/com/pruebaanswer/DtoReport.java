@@ -83,4 +83,6 @@ public class DtoReport {
     public void setSiteInterestId(String siteInterestId) {
         this.siteInterestId = siteInterestId;
     }
+
+
 }
