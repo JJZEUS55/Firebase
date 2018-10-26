@@ -1,17 +1,17 @@
 package redes.com.pruebaanswer;
 
 public class DtoSeccion {
-    private long IdSeccion;
+    private String IdSeccion;
     private String Description;
     private String Idform;
     private String name;
 
 
-    public long getIdSeccion() {
+    public String getIdSeccion() {
         return IdSeccion;
     }
 
-    public void setIdSeccion(long idSeccion) {
+    public void setIdSeccion(String idSeccion) {
         IdSeccion = idSeccion;
     }
 

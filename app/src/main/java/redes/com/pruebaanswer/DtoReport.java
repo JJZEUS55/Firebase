@@ -1,23 +1,31 @@
 package redes.com.pruebaanswer;
 
 public class DtoReport {
-    private long reportIdentifier;
+    private String reportIdentifier;
     private String identifier;
     private String startedAt;
     private String finishedAt;
     private String lat;
     private String lng;
-    private long deviceId;
+    private String deviceId;
     private String data;
     private String siteInterestId;
 
 
-    public long getReportIdentifier() {
+    public String getReportIdentifier() {
         return reportIdentifier;
     }
 
-    public void setReportIdentifier(long reportIdentifier) {
+    public void setReportIdentifier(String reportIdentifier) {
         this.reportIdentifier = reportIdentifier;
+    }
+
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
     }
 
     public String getIdentifier() {
@@ -58,14 +66,6 @@ public class DtoReport {
 
     public void setLng(String lng) {
         this.lng = lng;
-    }
-
-    public long getDeviceId() {
-        return deviceId;
-    }
-
-    public void setDeviceId(long deviceId) {
-        this.deviceId = deviceId;
     }
 
     public String getData() {

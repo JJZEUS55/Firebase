@@ -1,16 +1,16 @@
 package redes.com.pruebaanswer;
 
 public class DtoOption {
-    private int idOption;
+    private String idOption;
     private String IdInputEvent;
     private String value;
     private String order;
 
-    public int getIdOption() {
+    public String getIdOption() {
         return idOption;
     }
 
-    public void setIdOption(int idOption) {
+    public void setIdOption(String idOption) {
         this.idOption = idOption;
     }
 

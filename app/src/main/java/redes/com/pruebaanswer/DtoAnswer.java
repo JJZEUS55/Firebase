@@ -1,26 +1,34 @@
 package redes.com.pruebaanswer;
 
 public class DtoAnswer {
-    private int idAnswer;
-    private int indputId; //ID DE QUESTION
+    private String idAnswer;
+    private String indputId; //ID DE QUESTION
     private String reportIdentifier;
     private String answer;
-    private long createdAt;
+    private String createdAt;
 
-    public int getIdAnswer() {
+    public String getIdAnswer() {
         return idAnswer;
     }
 
-    public void setIdAnswer(int idAnswer) {
+    public void setIdAnswer(String idAnswer) {
         this.idAnswer = idAnswer;
     }
 
-    public int getIndputId() {
+    public String getIndputId() {
         return indputId;
     }
 
-    public void setIndputId(int indputId) {
+    public void setIndputId(String indputId) {
         this.indputId = indputId;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     public String getReportIdentifier() {
@@ -39,11 +47,4 @@ public class DtoAnswer {
         this.answer = answer;
     }
 
-    public long getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(long createdAt) {
-        this.createdAt = createdAt;
-    }
 }

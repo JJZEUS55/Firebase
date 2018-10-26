@@ -8,16 +8,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Answer extends AppCompatActivity implements View.OnClickListener {
     FirebaseDatabase database;
@@ -31,12 +30,12 @@ public class Answer extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
         btnEnviar = findViewById(R.id.btn_firebase);
         textView = findViewById(R.id.txt_answer2);
-//        mDatabase = FirebaseDatabase.getInstance().getReference();
-//        database = FirebaseDatabase.getInstance();
-//        mDatabase = database.getReference("Probando");
-//        mDatabase.setValue("HE RECIVIDO DATOS");
-//        updateDataPrueba();
+        btnEnviar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+            }
+        });
     }
 
     public void insertData() {
@@ -44,27 +43,27 @@ public class Answer extends AppCompatActivity implements View.OnClickListener {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
         for (int i = 0; i < 7; i = i + 2) {
             DtoReport dtoReport = new DtoReport();
-            dtoReport.setReportIdentifier(i);
+            dtoReport.setReportIdentifier("" + i);
             dtoReport.setIdentifier("123123123");
             dtoReport.setStartedAt("timestamp");
             dtoReport.setFinishedAt("timestamp");
             dtoReport.setLat("19.51661");
             dtoReport.setFinishedAt("-99.24668");
-            dtoReport.setDeviceId((i * 2) + 5);
+            dtoReport.setDeviceId("1");
             dtoReport.setData("LALALALALA " + i);
             dtoReport.setSiteInterestId("INTERESADO " + i);
 
             DtoAnswer dtoAnswer = new DtoAnswer();
-            dtoAnswer.setIdAnswer(i);
+            dtoAnswer.setIdAnswer("" + i);
             dtoAnswer.setAnswer("prueba respuesta " + i);
-            dtoAnswer.setCreatedAt(123456789 + i);
-            dtoAnswer.setIndputId(i);
+            dtoAnswer.setCreatedAt("" + 123456789 + i);
+            dtoAnswer.setIndputId("" + i);
             dtoAnswer.setReportIdentifier("Jorge554810362 " + i);
 
 
             myRef.child("reports").child("reportIdentifier" + dtoReport.getReportIdentifier()).setValue(dtoReport);
 
-            myRef.child("reports").child("reportIdentifier" + dtoReport.getReportIdentifier()).child("answer").child("id_answer" + dtoAnswer.getIdAnswer()).setValue(dtoAnswer);
+            myRef.child("reports").child(dtoReport.getReportIdentifier()).child("answer").child(dtoAnswer.getIdAnswer()).setValue(dtoAnswer);
         }
     }
 
@@ -118,20 +117,38 @@ public class Answer extends AppCompatActivity implements View.OnClickListener {
         });
     }
 
-
     public void updateDataPrueba() {
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Seccion").child("idSeccion1").child("Question").child("idQuestion1").child("option").child("idOption1");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Seccion").child("IdSeccion1").child("Question").child("idQuestion1").child("option").child("idOption1");
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String value = "";
-                for(DataSnapshot postSnap:dataSnapshot.getChildren()){
-                    value = postSnap.child("value").getValue(String.class);
-                }
+                Map<String, Object> resultUpdate = new HashMap<>();
+                resultUpdate.put("value", "VALOR DE PRUEBA SETEADO");
+                dataSnapshot.getRef().updateChildren(resultUpdate);
+                textView.setText("");
+            }
 
-                textView.setText(value);
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void deleteData(){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Seccion").child("IdSeccion1").child("Question").child("idQuestion1").child("option").child("idOption1");
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String value = "";
+                Map<String, Object> resultUpdate = new HashMap<>();
+//                resultUpdate.put("value", "VALOR DE PRUEBA SETEADO");
+                dataSnapshot.getRef().removeValue();
+                textView.setText("");
             }
 
             @Override
