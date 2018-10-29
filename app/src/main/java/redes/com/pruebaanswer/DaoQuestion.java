@@ -1,36 +1,58 @@
 package redes.com.pruebaanswer;
 
+import android.support.annotation.NonNull;
+import android.util.Log;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DaoQuestion {
-    private FirebaseDatabase database;
     private DatabaseReference mDatabase;
+    private List<DtoQuestion> dtoQuestionList;
+
 
     public DaoQuestion() {
-        database = FirebaseDatabase.getInstance();
-        mDatabase = database.getReference("Seccion");
+
     }
 
-    private List<DtoQuestion> selectFirebase() {
-        List<DtoQuestion> dtoQuestionList = new ArrayList<>();
-        mDatabase.
+    public List<DtoQuestion> selectFirebase(int idSeccion) {
+        mDatabase = FirebaseDatabase.getInstance().getReference("Seccion").child("IdSeccion" + idSeccion).child("Question");
+        dtoQuestionList = new ArrayList<>();
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot postData : dataSnapshot.getChildren()) {
+                    DtoQuestion dtoQuestion = postData.getValue(DtoQuestion.class);
+                    dtoQuestionList.add(dtoQuestion);
+                }
+                Log.e("listQuestion", "List " + dtoQuestionList);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         return dtoQuestionList;
     }
 
-    private int insertFirebase(DtoReport dtoReport, DtoAnswer dtoAnswer) {
+    public int insertFirebase(int idSeccion) {
         int resp = 0;
-        mDatabase.child("reports").child("reportIdentifier" + dtoReport.getReportIdentifier()).child("answer").child("id_answer" + dtoAnswer.getIdAnswer()).setValue(dtoAnswer);
+//        mDatabase.child("reports").child("reportIdentifier" + dtoReport.getReportIdentifier()).child("answer").child("id_answer" + dtoAnswer.getIdAnswer()).setValue(dtoAnswer);
 
         return resp;
     }
 
 
-    private int deleteFirebase() {
+    public int deleteFirebase() {
         int resp = 0;
 
 
@@ -38,7 +60,7 @@ public class DaoQuestion {
     }
 
 
-    private int updateFirebase(DtoAnswer dtoAnswer) {
+    public int updateFirebase(DtoQuestion dtoAnswer) {
         int resp = 0;
 
 

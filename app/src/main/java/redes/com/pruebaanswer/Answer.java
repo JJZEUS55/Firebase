@@ -7,7 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import com.facebook.stetho.Stetho;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,18 +25,22 @@ public class Answer extends AppCompatActivity implements View.OnClickListener {
     FirebaseDatabase database;
     DatabaseReference mDatabase;
     Button btnEnviar;
+    EditText edit;
     TextView textView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Stetho.initializeWithDefaults(this);
         setContentView(R.layout.activity_main);
         btnEnviar = findViewById(R.id.btn_firebase);
+        edit = findViewById(R.id.txt_answer);
         textView = findViewById(R.id.txt_answer2);
+        AppDb.getAppDbHelper(this);
         btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+//                selectListData();
             }
         });
     }
@@ -77,9 +84,8 @@ public class Answer extends AppCompatActivity implements View.OnClickListener {
                 String value = "";
                 DtoOption dtoOption = null;
                 List<DtoOption> listDto = new ArrayList<>();
-//                    value = (String) postSnap.child("value").getValue();
                 for(DataSnapshot postData : dataSnapshot.getChildren()){
-                    dtoOption = dataSnapshot.getValue(DtoOption.class);
+                    dtoOption = postData.getValue(DtoOption.class);
                     listDto.add(dtoOption);
                 }
 
@@ -158,6 +164,49 @@ public class Answer extends AppCompatActivity implements View.OnClickListener {
         });
     }
 
+    private void insertDtoReport(){
+        DtoReport dtoReport = new DtoReport();
+        dtoReport.setReportIdentifier("" + 2);
+        dtoReport.setIdentifier("123123123");
+        dtoReport.setStartedAt("timestamp");
+        dtoReport.setFinishedAt("timestamp");
+        dtoReport.setLat("19.51661");
+        dtoReport.setFinishedAt("-99.24668");
+        dtoReport.setDeviceId("1");
+        dtoReport.setData("LALALALALA " + 2);
+        dtoReport.setSiteInterestId("INTERESADO " + 2);
+
+        List<DtoAnswer> dtoAnswerList = new ArrayList<>();
+        Map<String, DtoAnswer> dtoAnswerMap = new HashMap<>();
+        DtoAnswer dtoAnswer = new DtoAnswer();
+        dtoAnswer.setIdAnswer("" + 2);
+        dtoAnswer.setAnswer("prueba respuesta " + 2);
+        dtoAnswer.setCreatedAt("" + 123456789 + 2);
+        dtoAnswer.setIndputId("" + 2);
+        dtoAnswer.setReportIdentifier("Jorge554810362 " + 2);
+
+        DtoAnswer dtoAnswer2 = new DtoAnswer();
+        dtoAnswer2.setIdAnswer("" + 3);
+        dtoAnswer2.setAnswer("prueba respuesta " + 3);
+        dtoAnswer2.setCreatedAt("" + 123456789 + 3);
+        dtoAnswer2.setIndputId("" + 3);
+        dtoAnswer2.setReportIdentifier("Jorge554810362 " + 3);
+
+        dtoAnswerMap.put("answerId" + dtoAnswer.getIdAnswer(), dtoAnswer);
+        dtoAnswerMap.put("answerId" + dtoAnswer2.getIdAnswer(), dtoAnswer2);
+
+
+        dtoAnswerList.add(dtoAnswer);
+        dtoAnswerList.add(dtoAnswer2);
+
+        dtoAnswer.setAnswer(edit.getText().toString());
+
+
+
+        DaoAnswer daoAnswer = new DaoAnswer();
+        daoAnswer.insertFirebase(dtoReport, dtoAnswerMap);
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -173,4 +222,6 @@ public class Answer extends AppCompatActivity implements View.OnClickListener {
 //            Toast.makeText(getApplicationContext(), "ENVIO EXITOSO", Toast.LENGTH_SHORT).show();
         }
     }
+
+
 }

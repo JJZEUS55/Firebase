@@ -112,4 +112,22 @@ public class DtoQuestion {
     public void setDtoOptionMap(Map<String, DtoOption> option) {
         this.option = option;
     }
+
+    @Override
+    public String toString() {
+        return "DtoQuestion{" +
+                "id_question='" + id_question + '\'' +
+                ", id_secction='" + id_secction + '\'' +
+                ", id_type='" + id_type + '\'' +
+                ", length='" + length + '\'' +
+                ", description='" + description + '\'' +
+                ", requeried='" + requeried + '\'' +
+                ", visibility='" + visibility + '\'' +
+                ", order='" + order + '\'' +
+                ", Max_photo='" + Max_photo + '\'' +
+                ", Min_photo='" + Min_photo + '\'' +
+                ", answer_default='" + answer_default + '\'' +
+                ", option=" + option +
+                '}';
+    }
 }

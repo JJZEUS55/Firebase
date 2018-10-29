@@ -47,4 +47,14 @@ public class DtoAnswer {
         this.answer = answer;
     }
 
+    @Override
+    public String toString() {
+        return "DtoAnswer{" +
+                "idAnswer='" + idAnswer + '\'' +
+                ", indputId='" + indputId + '\'' +
+                ", reportIdentifier='" + reportIdentifier + '\'' +
+                ", answer='" + answer + '\'' +
+                ", createdAt='" + createdAt + '\'' +
+                '}';
+    }
 }
