@@ -1,6 +1,11 @@
-package redes.com.pruebaanswer;
+package redes.com.pruebaanswer.realm.Dao.Dto;
 
-public class DtoReport {
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
+public class DtoReport extends RealmObject {
+    @PrimaryKey
     private String reportIdentifier;
     private String identifier;
     private String startedAt;
@@ -10,6 +15,8 @@ public class DtoReport {
     private String deviceId;
     private String data;
     private String siteInterestId;
+    private String statusSend;
+    private RealmList<DtoAnswer> answers = new RealmList<>();
 
 
     public String getReportIdentifier() {
@@ -84,5 +91,19 @@ public class DtoReport {
         this.siteInterestId = siteInterestId;
     }
 
+    public String getStatusSend() {
+        return statusSend;
+    }
 
+    public void setStatusSend(String statusSend) {
+        this.statusSend = statusSend;
+    }
+
+    public RealmList<DtoAnswer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(RealmList<DtoAnswer> answers) {
+        this.answers = answers;
+    }
 }

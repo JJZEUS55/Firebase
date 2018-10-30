@@ -1,4 +1,4 @@
-package redes.com.pruebaanswer;
+package redes.com.pruebaanswer.firebase;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import redes.com.pruebaanswer.realm.Dao.Dto.DtoAnswer;
+import redes.com.pruebaanswer.realm.Dao.Dto.DtoReport;
 
 public class DaoAnswer {
     private DatabaseReference mDatabase;

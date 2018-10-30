@@ -1,8 +1,11 @@
-package redes.com.pruebaanswer;
-import java.util.List;
-import java.util.Map;
+package redes.com.pruebaanswer.realm.Dao.Dto;
 
-public class DtoQuestion {
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
+public class DtoQuestion extends RealmObject {
+    @PrimaryKey
     private String id_question;
     private String id_secction;
     private String id_type;
@@ -14,8 +17,8 @@ public class DtoQuestion {
     private String Max_photo;
     private String Min_photo;
     private String answer_default;
-    private Map<String, DtoOption> option;
-//    private List<DtoOption> option;
+//    private Map<String, DtoOption> option;
+    private RealmList<DtoOption> option;
 
     public String getId_question() {
         return id_question;
@@ -105,11 +108,12 @@ public class DtoQuestion {
         this.answer_default = answer_default;
     }
 
-    public Map<String, DtoOption> getOption() {
+
+    public RealmList<DtoOption> getOption() {
         return option;
     }
 
-    public void setDtoOptionMap(Map<String, DtoOption> option) {
+    public void setOption(RealmList<DtoOption> option) {
         this.option = option;
     }
 
@@ -127,7 +131,7 @@ public class DtoQuestion {
                 ", Max_photo='" + Max_photo + '\'' +
                 ", Min_photo='" + Min_photo + '\'' +
                 ", answer_default='" + answer_default + '\'' +
-                ", option=" + option +
+                ", option=" +
                 '}';
     }
 }

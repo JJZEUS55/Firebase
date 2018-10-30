@@ -1,10 +1,13 @@
-package redes.com.pruebaanswer;
+package redes.com.pruebaanswer.firebase;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import redes.com.pruebaanswer.realm.Dao.Dto.DtoAnswer;
+import redes.com.pruebaanswer.realm.Dao.Dto.DtoReport;
 
 public class DaoReport {
     private FirebaseDatabase database;

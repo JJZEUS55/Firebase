@@ -1,7 +1,13 @@
-package redes.com.pruebaanswer;
+package redes.com.pruebaanswer.realm.Dao.Dto;
 
-public class DtoAnswer {
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.Required;
+
+public class DtoAnswer extends RealmObject {
+    @PrimaryKey
     private String idAnswer;
+    private String idReport;
     private String indputId; //ID DE QUESTION
     private String reportIdentifier;
     private String answer;
@@ -25,6 +31,14 @@ public class DtoAnswer {
 
     public String getCreatedAt() {
         return createdAt;
+    }
+
+    public String getIdReport() {
+        return idReport;
+    }
+
+    public void setIdReport(String idReport) {
+        this.idReport = idReport;
     }
 
     public void setCreatedAt(String createdAt) {

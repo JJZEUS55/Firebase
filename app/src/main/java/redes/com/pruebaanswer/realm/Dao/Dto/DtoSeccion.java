@@ -1,6 +1,10 @@
-package redes.com.pruebaanswer;
+package redes.com.pruebaanswer.realm.Dao.Dto;
 
-public class DtoSeccion {
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
+public class DtoSeccion extends RealmObject {
+    @PrimaryKey
     private String IdSeccion;
     private String Description;
     private String Idform;
