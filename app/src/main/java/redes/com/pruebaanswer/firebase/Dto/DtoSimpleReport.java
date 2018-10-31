@@ -129,8 +129,8 @@ public class DtoSimpleReport {
         this.data = dtoReport.getData();
         this.siteInterestId = dtoReport.getSiteInterestId();
         this.statusSend = dtoReport.getStatusSend();
-        for(DtoAnswer dtoAnswer : dtoReport.getAnswers()){
-            this.answers.add(dtoAnswer.convertToSimple());
-        }
+//        for(DtoAnswer dtoAnswer : dtoReport.getAnswers()){
+//            this.answers.add(dtoAnswer.convertToSimple());
+//        }
     }
 }
