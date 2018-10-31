@@ -28,6 +28,22 @@ public class DaoReport {
         mDatabase = database.getReference();
     }
 
+    public long autoIncrementIdReport(){
+        realm.beginTransaction();
+        Number maxValue = realm.where(DtoReport.class).max("reportIdentifier");
+        long pk = (maxValue != null) ? (long)maxValue + 1 : 0;
+        realm.commitTransaction();
+        return pk;
+    }
+
+    public long autoIncrementIdAnswer(){
+        realm.beginTransaction();
+        Number maxValue = realm.where(DtoAnswer.class).max("idAnswer");
+        long pk = (maxValue != null) ? (long)maxValue + 1 : 0;
+        realm.commitTransaction();
+        return pk;
+    }
+
     public DtoReport selectRealm(int idReport) {
         realm.beginTransaction();
         DtoReport dtoReport = realm.where(DtoReport.class).equalTo("reportIdentifier", "" + idReport).findFirst();
@@ -57,6 +73,11 @@ public class DaoReport {
     public int insertRealm(DtoReport dtoReportList) {
         int resp = 0;
         RealmList<DtoReport> dtoReportRealmList = new RealmList<>();
+        dtoReportList.setReportIdentifier(autoIncrementIdReport());
+        for (DtoAnswer dtoAnswer : dtoReportList.getAnswers()){
+            dtoAnswer.setIdAnswer(autoIncrementIdAnswer());
+            dtoAnswer.setReportIdentifier(dtoReportList.getReportIdentifier());
+        }
         realm.beginTransaction();
         realm.insertOrUpdate(dtoReportList);
         realm.commitTransaction();

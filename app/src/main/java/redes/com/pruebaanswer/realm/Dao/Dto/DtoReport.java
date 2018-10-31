@@ -5,6 +5,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
@@ -15,7 +16,7 @@ import redes.com.pruebaanswer.firebase.Dto.DtoSimpleReport;
 public class DtoReport extends RealmObject {
     @PrimaryKey
     @NonNull
-    private String reportIdentifier;
+    private long reportIdentifier;
     private String identifier;
     private String startedAt;
     private String finishedAt;
@@ -28,11 +29,12 @@ public class DtoReport extends RealmObject {
     private RealmList<DtoAnswer> answers = new RealmList<>();
 
 
-    public String getReportIdentifier() {
+    @NonNull
+    public long getReportIdentifier() {
         return reportIdentifier;
     }
 
-    public void setReportIdentifier(String reportIdentifier) {
+    public void setReportIdentifier(@NonNull long reportIdentifier) {
         this.reportIdentifier = reportIdentifier;
     }
 
