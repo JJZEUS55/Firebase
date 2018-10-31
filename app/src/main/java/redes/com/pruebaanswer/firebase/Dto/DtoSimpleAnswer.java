@@ -1,17 +1,12 @@
-package redes.com.pruebaanswer.realm.Dao.Dto;
+package redes.com.pruebaanswer.firebase.Dto;
 
 import android.support.annotation.NonNull;
 
-import java.util.List;
-
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
-import io.realm.annotations.Required;
-import redes.com.pruebaanswer.firebase.Dto.DtoSimpleAnswer;
+import redes.com.pruebaanswer.realm.Dao.Dto.DtoAnswer;
 
-public class DtoAnswer extends RealmObject {
-    @PrimaryKey
-    @NonNull
+public class DtoSimpleAnswer {
     private String idAnswer;
     private String idReport;
     private String indputId; //ID DE QUESTION
@@ -67,16 +62,13 @@ public class DtoAnswer extends RealmObject {
         this.answer = answer;
     }
 
-    public DtoSimpleAnswer convertToSimple(){
-        DtoSimpleAnswer dtoSimpleAnswer = new DtoSimpleAnswer();
-        dtoSimpleAnswer.setAnswer(this.idAnswer);
-        dtoSimpleAnswer.setIdReport(this.idReport);
-        dtoSimpleAnswer.setIndputId(this.indputId);
-        dtoSimpleAnswer.setReportIdentifier(this.reportIdentifier);
-        dtoSimpleAnswer.setAnswer(this.answer);
-        dtoSimpleAnswer.setCreatedAt(this.createdAt);
-
-        return dtoSimpleAnswer;
+    public void convertToSimple(DtoAnswer dtoAnswer){
+        this.idAnswer = dtoAnswer.getIdAnswer();
+        this.idReport = dtoAnswer.getIdReport();
+        this.indputId = dtoAnswer.getIndputId(); //ID DE QUESTION
+        this.reportIdentifier = dtoAnswer.getReportIdentifier();
+        this.answer = dtoAnswer.getAnswer();
+        this.createdAt = dtoAnswer.getCreatedAt();
     }
 
     @Override

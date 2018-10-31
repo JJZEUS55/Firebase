@@ -1,14 +1,12 @@
-package redes.com.pruebaanswer.realm.Dao.Dto;
+package redes.com.pruebaanswer.firebase.Dto;
 
 import android.support.annotation.NonNull;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
-import io.realm.annotations.Required;
 
-public class DtoOption extends RealmObject {
-    @PrimaryKey
-    @NonNull
+public class DtoSimpleOption {
+
     private String idOption;
     private String IdInputEvent;
     private String value;

@@ -10,21 +10,21 @@ import io.realm.RealmList;
 import redes.com.pruebaanswer.realm.Dao.AppDb;
 import redes.com.pruebaanswer.realm.Dao.Dto.DtoOption;
 
-public class DaoROption {
+public class DaoOption {
     private Realm realm;
 
-    public DaoROption(Context context) {
+    public DaoOption(Context context) {
         realm = AppDb.getAppDbRealm(context);
     }
 
-    public List<DtoOption> select(int idReport) {
+    public List<DtoOption> selectRealm(int idReport) {
         realm.beginTransaction();
         ArrayList<DtoOption> dtoOptions = new ArrayList(realm.where(DtoOption.class).equalTo("id_report", idReport).findAll());
         realm.commitTransaction();
         return dtoOptions;
     }
 
-    public int insertFirebase(List<DtoOption> dtoOptionList) {
+    public int insertRealm(List<DtoOption> dtoOptionList) {
         int resp = 0;
         RealmList<DtoOption> dtoOptionRealmList = new RealmList<>();
         realm.beginTransaction();
@@ -34,7 +34,7 @@ public class DaoROption {
     }
 
 
-    public int deleteFirebase() {
+    public int deleteRealm() {
         int resp = 0;
         realm.beginTransaction();
 
@@ -44,7 +44,7 @@ public class DaoROption {
     }
 
 
-    public int updateFirebase(DtoOption dtoOption) {
+    public int updateRealm(DtoOption dtoOption) {
         int resp = 0;
         realm.beginTransaction();
         realm.copyToRealmOrUpdate(dtoOption);

@@ -1,11 +1,11 @@
-package redes.com.pruebaanswer.realm.Dao.Dto;
+package redes.com.pruebaanswer.firebase.Dto;
 
 import android.support.annotation.NonNull;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class DtoSeccion extends RealmObject {
+public class DtoSimpleSeccion extends RealmObject {
     @PrimaryKey
     @NonNull
     private String IdSeccion;

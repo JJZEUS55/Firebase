@@ -1,5 +1,6 @@
-package redes.com.pruebaanswer.firebase;
+package redes.com.pruebaanswer.realm.Dao.Dao;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -14,14 +15,56 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.realm.Realm;
+import io.realm.RealmList;
+import redes.com.pruebaanswer.realm.Dao.AppDb;
 import redes.com.pruebaanswer.realm.Dao.Dto.DtoAnswer;
 import redes.com.pruebaanswer.realm.Dao.Dto.DtoReport;
 
 public class DaoAnswer {
+    private Realm realm;
     private DatabaseReference mDatabase;
     private List<DtoAnswer> dtoAnswerList;
 
-    public DaoAnswer() {
+    public DaoAnswer(Context context) {
+        realm = AppDb.getAppDbRealm(context);
+    }
+
+    public List<DtoAnswer> selectRealm(String idReport) {
+        realm.beginTransaction();
+        ArrayList<DtoAnswer> dtoAnswerList = new ArrayList(realm.where(DtoAnswer.class).equalTo("idReport", idReport).findAll());
+        realm.commitTransaction();
+        Log.i("selectAnswers", dtoAnswerList.toString());
+        return dtoAnswerList;
+    }
+
+    public int insertRealm(List<DtoAnswer> dtoAnswers) {
+        int resp = 0;
+        RealmList<DtoAnswer> dtoAnswerRealmList = new RealmList<>();
+        realm.beginTransaction();
+        dtoAnswerRealmList.addAll(dtoAnswers);
+        realm.insertOrUpdate(dtoAnswerRealmList);
+        realm.commitTransaction();
+        return resp;
+    }
+
+
+    public int deleteRealm() {
+        int resp = 0;
+        realm.beginTransaction();
+
+
+        realm.commitTransaction();
+        return resp;
+    }
+
+
+    public int updateRealm(List<DtoAnswer> dtoAnswers) {
+        int resp = 0;
+        realm.beginTransaction();
+        realm.copyToRealmOrUpdate(dtoAnswers);
+        realm.commitTransaction();
+        return resp;
     }
 
     public List<DtoAnswer> selectFirebase(int idReport) {

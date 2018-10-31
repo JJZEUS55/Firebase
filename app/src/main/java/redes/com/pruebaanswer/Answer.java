@@ -24,15 +24,14 @@ import java.util.List;
 import java.util.Map;
 
 import io.realm.Realm;
-import redes.com.pruebaanswer.firebase.DaoAnswer;
-import redes.com.pruebaanswer.realm.Dao.Dao.DaoRAnswer;
-import redes.com.pruebaanswer.realm.Dao.Dao.DaoRReport;
+import redes.com.pruebaanswer.realm.Dao.Dao.DaoAnswer;
+import redes.com.pruebaanswer.realm.Dao.Dao.DaoReport;
 import redes.com.pruebaanswer.realm.Dao.Dto.DtoAnswer;
 import redes.com.pruebaanswer.realm.Dao.Dto.DtoOption;
 import redes.com.pruebaanswer.realm.Dao.Dto.DtoReport;
 
 public class Answer extends AppCompatActivity implements View.OnClickListener {
-    Button btnEnviar, btnSelect, btnUpdate;
+    Button btnEnviar, btnSelect, btnUpdate, btnSendFirebase;
     EditText edit;
     TextView textView;
 
@@ -58,6 +57,7 @@ public class Answer extends AppCompatActivity implements View.OnClickListener {
         btnEnviar = findViewById(R.id.btn_firebase);
         btnSelect = findViewById(R.id.btn_select);
         btnUpdate = findViewById(R.id.btn_update);
+        btnSendFirebase= findViewById(R.id.btn_firebase_send);
 
         edit = findViewById(R.id.txt_answer);
         textView = findViewById(R.id.txt_answer2);
@@ -66,8 +66,8 @@ public class Answer extends AppCompatActivity implements View.OnClickListener {
             public void onClick(View view) {
 
                 DtoReport dtoReport = new DtoReport();
-                dtoReport.setReportIdentifier("" + 2);
-                dtoReport.setIdentifier("123123123");
+                dtoReport.setReportIdentifier("2");
+                dtoReport.setIdentifier("dsadasfdfdg");
                 dtoReport.setStartedAt("timestamp");
                 dtoReport.setFinishedAt("timestamp");
                 dtoReport.setLat("19.51661");
@@ -83,37 +83,37 @@ public class Answer extends AppCompatActivity implements View.OnClickListener {
                 dtoAnswer.setAnswer("prueba respuesta " + 1);
                 dtoAnswer.setCreatedAt("" + 123456789 + 1);
                 dtoAnswer.setIndputId("" + 1);
-                dtoAnswer.setIdReport("1");
-                dtoAnswer.setReportIdentifier("Jorge554810362 " + 1);
+                dtoAnswer.setIdReport("2");
+                dtoAnswer.setReportIdentifier("2");
 
                 DtoAnswer dtoAnswer2 = new DtoAnswer();
-                dtoAnswer2.setIdAnswer("" + 2);
-                dtoAnswer2.setIdReport("1");
-                dtoAnswer2.setAnswer("prueba respuesta " + 1);
+                dtoAnswer2.setIdAnswer("2");
+                dtoAnswer2.setIdReport(dtoReport.getReportIdentifier());
+                dtoAnswer2.setAnswer("prueba respuesta " + 2);
                 dtoAnswer2.setCreatedAt("" + 123456789 + 1);
                 dtoAnswer2.setIndputId("" + 1);
-                dtoAnswer2.setReportIdentifier("Jorge554810362 " + 1);
+                dtoAnswer2.setReportIdentifier("2");
 
                 DtoAnswer dtoAnswer3 = new DtoAnswer();
-                dtoAnswer3.setIdAnswer("" + 3);
-                dtoAnswer3.setIdReport("2");
-                dtoAnswer3.setAnswer("prueba respuesta " + 1);
+                dtoAnswer3.setIdAnswer("3");
+                dtoAnswer3.setIdReport(dtoReport.getReportIdentifier());
+                dtoAnswer3.setAnswer("prueba respuesta " + 3);
                 dtoAnswer3.setCreatedAt("" + 123456789 + 1);
                 dtoAnswer3.setIndputId("" + 1);
-                dtoAnswer3.setReportIdentifier("Jorge554810362 " + 1);
+                dtoAnswer3.setReportIdentifier("2");
 
                 dtoAnswerList.add(dtoAnswer);
                 dtoAnswerList.add(dtoAnswer2);
                 dtoAnswerList.add(dtoAnswer3);
 
+                Log.i("selectReports", dtoAnswerList.toString());
+
                 dtoReport.getAnswers().add(dtoAnswer);
                 dtoReport.getAnswers().add(dtoAnswer2);
                 dtoReport.getAnswers().add(dtoAnswer3);
 
-//                DaoRAnswer daoRAnswer = new DaoRAnswer(getApplicationContext());
-//                daoRAnswer.insert(dtoAnswerList);
-                DaoRReport daoRReport = new DaoRReport(getApplicationContext());
-                daoRReport.insert(dtoReport);
+                DaoReport daoReport = new DaoReport(getApplicationContext());
+                daoReport.insertRealm(dtoReport);
             }
         });
 
@@ -121,11 +121,19 @@ public class Answer extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void onClick(View view) {
 
-                DaoRReport daoRReport = new DaoRReport(getApplicationContext());
-                daoRReport.select(2);
+                DaoReport daoReport = new DaoReport(getApplicationContext());
+//                daoReport.select(2);
 
-//                DaoRAnswer daoRAnswer = new DaoRAnswer(getApplicationContext());
+//                DaoAnswer daoRAnswer = new DaoAnswer(getApplicationContext());
 //                daoRAnswer.select("1");
+            }
+        });
+
+        btnSendFirebase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PresenterSend presenterSend = new PresenterSend(getApplicationContext());
+                presenterSend.send();
             }
         });
 
@@ -159,8 +167,8 @@ public class Answer extends AppCompatActivity implements View.OnClickListener {
                 dtoAnswerList.add(dtoAnswer2);
                 dtoAnswerList.add(dtoAnswer3);
 
-                DaoRAnswer daoRAnswer = new DaoRAnswer(getApplicationContext());
-                daoRAnswer.update(dtoAnswerList);
+                DaoAnswer daoRAnswer = new DaoAnswer(getApplicationContext());
+                daoRAnswer.updateRealm(dtoAnswerList);
             }
         });
     }
@@ -322,15 +330,15 @@ public class Answer extends AppCompatActivity implements View.OnClickListener {
         dtoAnswer.setAnswer(edit.getText().toString());
 
 
-        DaoAnswer daoAnswer = new DaoAnswer();
-        daoAnswer.insertFirebase(dtoReport, dtoAnswerMap);
+//        DaoAnswer daoAnswer = new DaoAnswer();
+//        daoAnswer.insertFirebase(dtoReport, dtoAnswerMap);
     }
 
 
     @Override
     public void onClick(View v) {
         if (v.getId() == btnEnviar.getId()) {
-//            DtoAnswer dtoAnswer = new DtoAnswer();
+//            DtoSimpleAnswer dtoAnswer = new DtoSimpleAnswer();
 //            dtoAnswer.setIdAnswer(1);
 //            dtoAnswer.setAnswer("prueba respuesta 1");
 //            dtoAnswer.setCreatedAt(123456789);

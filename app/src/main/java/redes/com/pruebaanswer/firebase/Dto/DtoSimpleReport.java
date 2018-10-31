@@ -1,20 +1,21 @@
-package redes.com.pruebaanswer.realm.Dao.Dto;
+package redes.com.pruebaanswer.firebase.Dto;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.realm.RealmList;
+import io.realm.Realm;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
-import redes.com.pruebaanswer.firebase.Dto.DtoSimpleAnswer;
-import redes.com.pruebaanswer.firebase.Dto.DtoSimpleReport;
+import redes.com.pruebaanswer.realm.Dao.AppDb;
+import redes.com.pruebaanswer.realm.Dao.Dto.DtoAnswer;
+import redes.com.pruebaanswer.realm.Dao.Dto.DtoReport;
 
-public class DtoReport extends RealmObject {
-    @PrimaryKey
-    @NonNull
+public class DtoSimpleReport {
+
     private String reportIdentifier;
     private String identifier;
     private String startedAt;
@@ -25,7 +26,7 @@ public class DtoReport extends RealmObject {
     private String data;
     private String siteInterestId;
     private String statusSend;
-    private RealmList<DtoAnswer> answers = new RealmList<>();
+    private List<DtoSimpleAnswer> answers = new ArrayList<>();
 
 
     public String getReportIdentifier() {
@@ -108,35 +109,28 @@ public class DtoReport extends RealmObject {
         this.statusSend = statusSend;
     }
 
-    public RealmList<DtoAnswer> getAnswers() {
+    public List<DtoSimpleAnswer> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(RealmList<DtoAnswer> answers) {
+    public void setAnswers(List<DtoSimpleAnswer> answers) {
         this.answers = answers;
     }
 
-    public DtoSimpleReport covertToSimple(){
-        List<DtoSimpleAnswer> dtoAnswers = new ArrayList<>();
-        DtoSimpleReport dtoSimpleReport = new DtoSimpleReport();
-        dtoSimpleReport.setReportIdentifier(this.reportIdentifier);
-        dtoSimpleReport.setIdentifier(this.identifier);
-        dtoSimpleReport.setStartedAt(this.startedAt);
-        dtoSimpleReport.setFinishedAt(this.finishedAt);
-        dtoSimpleReport.setLat(this.lat);
-        dtoSimpleReport.setLng(this.lng);
-        dtoSimpleReport.setDeviceId(this.deviceId);
-        dtoSimpleReport.setData(this.data);
-        dtoSimpleReport.setSiteInterestId(this.siteInterestId);
-        dtoSimpleReport.setStatusSend(this.statusSend);
-        for(DtoAnswer dtoAnswer : this.answers){
-            Log.i("respuestasAns", "dto" + dtoAnswer);
-            dtoAnswers.add(dtoAnswer.convertToSimple());
+    public void convertSimple(Context context, DtoReport dtoReport){
+        Realm realm = AppDb.getAppDbRealm(context);
+        this.reportIdentifier = dtoReport.getReportIdentifier();
+        this.identifier = dtoReport.getIdentifier();
+        this.startedAt = dtoReport.getStartedAt();
+        this.finishedAt = dtoReport.getFinishedAt();
+        this.lat = dtoReport.getLat();
+        this.lng = dtoReport.getLng();
+        this.deviceId = dtoReport.getDeviceId();
+        this.data = dtoReport.getData();
+        this.siteInterestId = dtoReport.getSiteInterestId();
+        this.statusSend = dtoReport.getStatusSend();
+        for(DtoAnswer dtoAnswer : dtoReport.getAnswers()){
+            this.answers.add(dtoAnswer.convertToSimple());
         }
-        dtoSimpleReport.setAnswers(dtoAnswers);
-
-        Log.i("respuestas", dtoSimpleReport.getAnswers().toString());
-
-        return dtoSimpleReport;
     }
 }

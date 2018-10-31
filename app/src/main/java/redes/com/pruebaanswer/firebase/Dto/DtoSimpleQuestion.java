@@ -1,14 +1,9 @@
-package redes.com.pruebaanswer.realm.Dao.Dto;
+package redes.com.pruebaanswer.firebase.Dto;
 
-import android.support.annotation.NonNull;
+import java.util.Map;
 
-import io.realm.RealmList;
-import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
+public class DtoSimpleQuestion {
 
-public class DtoQuestion extends RealmObject {
-    @PrimaryKey
-    @NonNull
     private String id_question;
     private String id_secction;
     private String id_type;
@@ -20,8 +15,7 @@ public class DtoQuestion extends RealmObject {
     private String Max_photo;
     private String Min_photo;
     private String answer_default;
-//    private Map<String, DtoSimpleOption> option;
-    private RealmList<DtoOption> option;
+    private Map<String, DtoSimpleOption> option;
 
     public String getId_question() {
         return id_question;
@@ -112,11 +106,11 @@ public class DtoQuestion extends RealmObject {
     }
 
 
-    public RealmList<DtoOption> getOption() {
+    public Map<String, DtoSimpleOption> getOption() {
         return option;
     }
 
-    public void setOption(RealmList<DtoOption> option) {
+    public void setOption(Map<String, DtoSimpleOption> option) {
         this.option = option;
     }
 
