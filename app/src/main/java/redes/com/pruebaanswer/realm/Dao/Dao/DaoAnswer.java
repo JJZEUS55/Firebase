@@ -30,6 +30,14 @@ public class DaoAnswer {
         realm = AppDb.getAppDbRealm(context);
     }
 
+    public long autoIncrementId(){
+        realm.beginTransaction();
+        Number maxValue = realm.where(DtoAnswer.class).max("idAnswer");
+        long pk = (maxValue != null) ? (long)maxValue + 1 : 0;
+        realm.commitTransaction();
+        return pk;
+    }
+
     public List<DtoAnswer> selectRealm(String idReport) {
         realm.beginTransaction();
         ArrayList<DtoAnswer> dtoAnswerList = new ArrayList(realm.where(DtoAnswer.class).equalTo("idReport", idReport).findAll());
@@ -41,6 +49,9 @@ public class DaoAnswer {
     public int insertRealm(List<DtoAnswer> dtoAnswers) {
         int resp = 0;
         RealmList<DtoAnswer> dtoAnswerRealmList = new RealmList<>();
+        for (DtoAnswer dtoAnswer: dtoAnswers) {
+            dtoAnswer.setIdAnswer(autoIncrementId());
+        }
         realm.beginTransaction();
         dtoAnswerRealmList.addAll(dtoAnswers);
         realm.insertOrUpdate(dtoAnswerRealmList);

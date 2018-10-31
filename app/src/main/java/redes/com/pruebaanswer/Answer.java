@@ -86,7 +86,7 @@ public class Answer extends AppCompatActivity implements View.OnClickListener {
             public void onClick(View view) {
 
                 DtoReport dtoReport = new DtoReport();
-                dtoReport.setReportIdentifier("2");
+//                dtoReport.setReportIdentifier("2");
                 dtoReport.setIdentifier("dsadasfdfdg");
                 dtoReport.setStartedAt("timestamp");
                 dtoReport.setFinishedAt("timestamp");
@@ -99,28 +99,25 @@ public class Answer extends AppCompatActivity implements View.OnClickListener {
                 List<DtoAnswer> dtoAnswerList = new ArrayList<>();
 
                 DtoAnswer dtoAnswer = new DtoAnswer();
-                dtoAnswer.setIdAnswer("" + 1);
+//                dtoAnswer.setIdAnswer("" + 1);
                 dtoAnswer.setAnswer("prueba respuesta " + 1);
                 dtoAnswer.setCreatedAt("" + 123456789 + 1);
                 dtoAnswer.setIndputId("" + 1);
-                dtoAnswer.setIdReport("2");
-                dtoAnswer.setReportIdentifier("2");
+//                dtoAnswer.setReportIdentifier("2");
 
                 DtoAnswer dtoAnswer2 = new DtoAnswer();
-                dtoAnswer2.setIdAnswer("2");
-                dtoAnswer2.setIdReport(dtoReport.getReportIdentifier());
+//                dtoAnswer2.setIdAnswer("2");
                 dtoAnswer2.setAnswer("prueba respuesta " + 2);
                 dtoAnswer2.setCreatedAt("" + 123456789 + 1);
                 dtoAnswer2.setIndputId("" + 1);
-                dtoAnswer2.setReportIdentifier("2");
+//                dtoAnswer2.setReportIdentifier(dtoReport.getReportIdentifier());
 
                 DtoAnswer dtoAnswer3 = new DtoAnswer();
-                dtoAnswer3.setIdAnswer("3");
-                dtoAnswer3.setIdReport(dtoReport.getReportIdentifier());
+//                dtoAnswer3.setIdAnswer("3");
                 dtoAnswer3.setAnswer("prueba respuesta " + 3);
                 dtoAnswer3.setCreatedAt("" + 123456789 + 1);
                 dtoAnswer3.setIndputId("" + 1);
-                dtoAnswer3.setReportIdentifier("2");
+//                dtoAnswer3.setReportIdentifier(dtoReport.getReportIdentifier());
 
                 dtoAnswerList.add(dtoAnswer);
                 dtoAnswerList.add(dtoAnswer2);
@@ -163,25 +160,25 @@ public class Answer extends AppCompatActivity implements View.OnClickListener {
                 List<DtoAnswer> dtoAnswerList = new ArrayList<>();
 
                 DtoAnswer dtoAnswer = new DtoAnswer();
-                dtoAnswer.setIdAnswer("" + 1);
+//                dtoAnswer.setIdAnswer("" + 1);
                 dtoAnswer.setAnswer("prueba respuesta " + 123445);
                 dtoAnswer.setCreatedAt("aadasd" + 123456789 + 1);
-                dtoAnswer.setIndputId("" + 1);
-                dtoAnswer.setReportIdentifier("Jorge554810362 " + 1);
+//                dtoAnswer.setIndputId("" + 1);
+//                dtoAnswer.setReportIdentifier("Jorge554810362 " + 1);
 
                 DtoAnswer dtoAnswer2 = new DtoAnswer();
-                dtoAnswer2.setIdAnswer("" + 2);
+//                dtoAnswer2.setIdAnswer("" + 2);
                 dtoAnswer2.setAnswer("prueba respuesta " + 155555555);
                 dtoAnswer2.setCreatedAt("asdasd" + 123456789 + 1);
                 dtoAnswer2.setIndputId("" + 1);
-                dtoAnswer2.setReportIdentifier("Jorge554810362 " + 1);
+//                dtoAnswer2.setReportIdentifier("Jorge554810362 " + 1);
 
                 DtoAnswer dtoAnswer3 = new DtoAnswer();
-                dtoAnswer3.setIdAnswer("" + 3);
+//                dtoAnswer3.setIdAnswer("" + 3);
                 dtoAnswer3.setAnswer("zxczxc azxczx " + 155555555);
                 dtoAnswer3.setCreatedAt("axzxczxcxzcxz" + 123456789 + 1);
                 dtoAnswer3.setIndputId("" + 3);
-                dtoAnswer3.setReportIdentifier("Jorge554810362 " + 1);
+//                dtoAnswer3.setReportIdentifier("Jorge554810362 " + 1);
 
                 dtoAnswerList.add(dtoAnswer);
                 dtoAnswerList.add(dtoAnswer2);
@@ -198,7 +195,7 @@ public class Answer extends AppCompatActivity implements View.OnClickListener {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
         for (int i = 0; i < 7; i = i + 2) {
             DtoReport dtoReport = new DtoReport();
-            dtoReport.setReportIdentifier("" + i);
+//            dtoReport.setReportIdentifier("" + i);
             dtoReport.setIdentifier("123123123");
             dtoReport.setStartedAt("timestamp");
             dtoReport.setFinishedAt("timestamp");
@@ -209,16 +206,16 @@ public class Answer extends AppCompatActivity implements View.OnClickListener {
             dtoReport.setSiteInterestId("INTERESADO " + i);
 
             DtoAnswer dtoAnswer = new DtoAnswer();
-            dtoAnswer.setIdAnswer("" + i);
+//            dtoAnswer.setIdAnswer("" + i);
             dtoAnswer.setAnswer("prueba respuesta " + i);
             dtoAnswer.setCreatedAt("" + 123456789 + i);
             dtoAnswer.setIndputId("" + i);
-            dtoAnswer.setReportIdentifier("Jorge554810362 " + i);
+//            dtoAnswer.setReportIdentifier("Jorge554810362 " + i);
 
 
             myRef.child("reports").child("reportIdentifier" + dtoReport.getReportIdentifier()).setValue(dtoReport);
 
-            myRef.child("reports").child(dtoReport.getReportIdentifier()).child("answer").child(dtoAnswer.getIdAnswer()).setValue(dtoAnswer);
+//            myRef.child("reports").child(dtoReport.getReportIdentifier()).child("answer").child(dtoAnswer.getIdAnswer()).setValue(dtoAnswer);
         }
     }
 
@@ -314,7 +311,7 @@ public class Answer extends AppCompatActivity implements View.OnClickListener {
 
     private void insertDtoReport() {
         DtoReport dtoReport = new DtoReport();
-        dtoReport.setReportIdentifier("" + 2);
+//        dtoReport.setReportIdentifier("" + 2);
         dtoReport.setIdentifier("123123123");
         dtoReport.setStartedAt("timestamp");
         dtoReport.setFinishedAt("timestamp");
@@ -327,18 +324,18 @@ public class Answer extends AppCompatActivity implements View.OnClickListener {
         List<DtoAnswer> dtoAnswerList = new ArrayList<>();
         Map<String, DtoAnswer> dtoAnswerMap = new HashMap<>();
         DtoAnswer dtoAnswer = new DtoAnswer();
-        dtoAnswer.setIdAnswer("" + 2);
+//        dtoAnswer.setIdAnswer("" + 2);
         dtoAnswer.setAnswer("prueba respuesta " + 2);
         dtoAnswer.setCreatedAt("" + 123456789 + 2);
         dtoAnswer.setIndputId("" + 2);
-        dtoAnswer.setReportIdentifier("Jorge554810362 " + 2);
+//        dtoAnswer.setReportIdentifier("Jorge554810362 " + 2);
 
         DtoAnswer dtoAnswer2 = new DtoAnswer();
-        dtoAnswer2.setIdAnswer("" + 3);
+//        dtoAnswer2.setIdAnswer("" + 3);
         dtoAnswer2.setAnswer("prueba respuesta " + 3);
         dtoAnswer2.setCreatedAt("" + 123456789 + 3);
         dtoAnswer2.setIndputId("" + 3);
-        dtoAnswer2.setReportIdentifier("Jorge554810362 " + 3);
+//        dtoAnswer2.setReportIdentifier("Jorge554810362 " + 3);
 
         dtoAnswerMap.put("answerId" + dtoAnswer.getIdAnswer(), dtoAnswer);
         dtoAnswerMap.put("answerId" + dtoAnswer2.getIdAnswer(), dtoAnswer2);

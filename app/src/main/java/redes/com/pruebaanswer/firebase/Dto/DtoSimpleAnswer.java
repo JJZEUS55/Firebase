@@ -7,18 +7,17 @@ import io.realm.annotations.PrimaryKey;
 import redes.com.pruebaanswer.realm.Dao.Dto.DtoAnswer;
 
 public class DtoSimpleAnswer {
-    private String idAnswer;
-    private String idReport;
+    private long idAnswer;
+    private long reportIdentifier;
     private String indputId; //ID DE QUESTION
-    private String reportIdentifier;
     private String answer;
     private String createdAt;
 
-    public String getIdAnswer() {
+    public long getIdAnswer() {
         return idAnswer;
     }
 
-    public void setIdAnswer(String idAnswer) {
+    public void setIdAnswer(long idAnswer) {
         this.idAnswer = idAnswer;
     }
 
@@ -34,23 +33,15 @@ public class DtoSimpleAnswer {
         return createdAt;
     }
 
-    public String getIdReport() {
-        return idReport;
-    }
-
-    public void setIdReport(String idReport) {
-        this.idReport = idReport;
-    }
-
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 
-    public String getReportIdentifier() {
+    public long getReportIdentifier() {
         return reportIdentifier;
     }
 
-    public void setReportIdentifier(String reportIdentifier) {
+    public void setReportIdentifier(long reportIdentifier) {
         this.reportIdentifier = reportIdentifier;
     }
 
@@ -64,7 +55,6 @@ public class DtoSimpleAnswer {
 
     public void convertToSimple(DtoAnswer dtoAnswer){
         this.idAnswer = dtoAnswer.getIdAnswer();
-        this.idReport = dtoAnswer.getIdReport();
         this.indputId = dtoAnswer.getIndputId(); //ID DE QUESTION
         this.reportIdentifier = dtoAnswer.getReportIdentifier();
         this.answer = dtoAnswer.getAnswer();

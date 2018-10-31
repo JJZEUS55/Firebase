@@ -3,6 +3,7 @@ package redes.com.pruebaanswer.realm.Dao.Dto;
 import android.support.annotation.NonNull;
 
 import java.util.List;
+import java.util.UUID;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -12,18 +13,18 @@ import redes.com.pruebaanswer.firebase.Dto.DtoSimpleAnswer;
 public class DtoAnswer extends RealmObject {
     @PrimaryKey
     @NonNull
-    private String idAnswer;
-    private String idReport;
+    private long idAnswer;
+    private long reportIdentifier;
     private String indputId; //ID DE QUESTION
-    private String reportIdentifier;
     private String answer;
     private String createdAt;
 
-    public String getIdAnswer() {
+    @NonNull
+    public long getIdAnswer() {
         return idAnswer;
     }
 
-    public void setIdAnswer(String idAnswer) {
+    public void setIdAnswer(@NonNull long idAnswer) {
         this.idAnswer = idAnswer;
     }
 
@@ -39,23 +40,15 @@ public class DtoAnswer extends RealmObject {
         return createdAt;
     }
 
-    public String getIdReport() {
-        return idReport;
-    }
-
-    public void setIdReport(String idReport) {
-        this.idReport = idReport;
-    }
-
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 
-    public String getReportIdentifier() {
+    public long getReportIdentifier() {
         return reportIdentifier;
     }
 
-    public void setReportIdentifier(String reportIdentifier) {
+    public void setReportIdentifier(long reportIdentifier) {
         this.reportIdentifier = reportIdentifier;
     }
 
@@ -69,8 +62,6 @@ public class DtoAnswer extends RealmObject {
 
     public DtoSimpleAnswer convertToSimple(){
         DtoSimpleAnswer dtoSimpleAnswer = new DtoSimpleAnswer();
-        dtoSimpleAnswer.setAnswer(this.idAnswer);
-        dtoSimpleAnswer.setIdReport(this.idReport);
         dtoSimpleAnswer.setIndputId(this.indputId);
         dtoSimpleAnswer.setReportIdentifier(this.reportIdentifier);
         dtoSimpleAnswer.setAnswer(this.answer);

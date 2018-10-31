@@ -16,7 +16,7 @@ import redes.com.pruebaanswer.realm.Dao.Dto.DtoReport;
 
 public class DtoSimpleReport {
 
-    private String reportIdentifier;
+    private long reportIdentifier;
     private String identifier;
     private String startedAt;
     private String finishedAt;
@@ -29,11 +29,11 @@ public class DtoSimpleReport {
     private List<DtoSimpleAnswer> answers = new ArrayList<>();
 
 
-    public String getReportIdentifier() {
+    public long getReportIdentifier() {
         return reportIdentifier;
     }
 
-    public void setReportIdentifier(String reportIdentifier) {
+    public void setReportIdentifier(long reportIdentifier) {
         this.reportIdentifier = reportIdentifier;
     }
 
