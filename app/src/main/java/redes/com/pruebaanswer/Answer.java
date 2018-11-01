@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 import redes.com.pruebaanswer.realm.Dao.Dao.DaoAnswer;
 import redes.com.pruebaanswer.realm.Dao.Dao.DaoReport;
 import redes.com.pruebaanswer.realm.Dao.Dto.DtoAnswer;
@@ -31,7 +32,7 @@ import redes.com.pruebaanswer.realm.Dao.Dto.DtoOption;
 import redes.com.pruebaanswer.realm.Dao.Dto.DtoReport;
 
 public class Answer extends AppCompatActivity implements View.OnClickListener {
-    Button btnEnviar, btnSelect, btnUpdate, btnSendFirebase, btnCheckin;
+    Button btnEnviar, btnSelect, btnUpdate, btnSendFirebase, btnCheckin, btnCheckout;
     EditText edit;
     TextView textView;
 
@@ -58,6 +59,7 @@ public class Answer extends AppCompatActivity implements View.OnClickListener {
         btnEnviar = findViewById(R.id.btn_firebase);
         btnSelect = findViewById(R.id.btn_select);
         btnUpdate = findViewById(R.id.btn_update);
+        btnCheckout = findViewById(R.id.btn_checkout);
         btnSendFirebase= findViewById(R.id.btn_firebase_send);
 
         edit = findViewById(R.id.txt_answer);
@@ -96,7 +98,7 @@ public class Answer extends AppCompatActivity implements View.OnClickListener {
                 dtoReport.setData("LALALALALA " + 2);
                 dtoReport.setSiteInterestId("INTERESADO " + 2);
 
-                List<DtoAnswer> dtoAnswerList = new ArrayList<>();
+                RealmList<DtoAnswer> dtoAnswerList = new RealmList<>();
 
                 DtoAnswer dtoAnswer = new DtoAnswer();
 //                dtoAnswer.setIdAnswer("" + 1);
@@ -130,7 +132,14 @@ public class Answer extends AppCompatActivity implements View.OnClickListener {
 //                dtoReport.getAnswers().add(dtoAnswer3);
 
                 DaoReport daoReport = new DaoReport(getApplicationContext());
-                daoReport.insertRealm(dtoReport);
+                DtoReport dtoReport1 = daoReport.selectRealm(1);
+
+                Log.e("dtoReport1", dtoReport1.toString());
+
+                DaoAnswer daoAnswer = new DaoAnswer(getApplicationContext());
+                daoAnswer.insertRealm(1, dtoAnswerList);
+
+//                daoReport.insertAnswersRealm(dtoReport1,dtoAnswerList);
             }
         });
 

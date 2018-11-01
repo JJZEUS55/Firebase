@@ -28,25 +28,25 @@ public class DaoReport {
         mDatabase = database.getReference();
     }
 
-    public long autoIncrementIdReport(){
+    public long autoIncrementIdReport() {
         realm.beginTransaction();
         Number maxValue = realm.where(DtoReport.class).max("reportIdentifier");
-        long pk = (maxValue != null) ? (long)maxValue + 1 : 0;
+        long pk = (maxValue != null) ? (long) maxValue + 1 : 1;
         realm.commitTransaction();
         return pk;
     }
 
-    public long autoIncrementIdAnswer(){
+    public long autoIncrementIdAnswer() {
         realm.beginTransaction();
         Number maxValue = realm.where(DtoAnswer.class).max("idAnswer");
-        long pk = (maxValue != null) ? (long)maxValue + 1 : 0;
+        long pk = (maxValue != null) ? (long) maxValue + 1 : 1;
         realm.commitTransaction();
         return pk;
     }
 
     public DtoReport selectRealm(int idReport) {
         realm.beginTransaction();
-        DtoReport dtoReport = realm.where(DtoReport.class).equalTo("reportIdentifier", "" + idReport).findFirst();
+        DtoReport dtoReport = realm.where(DtoReport.class).equalTo("reportIdentifier", idReport).findFirst();
         realm.commitTransaction();
         Log.i("selectReports", dtoReport.toString());
         return dtoReport;
@@ -72,16 +72,22 @@ public class DaoReport {
 
     public int insertRealm(DtoReport dtoReportList) {
         int resp = 0;
-        RealmList<DtoReport> dtoReportRealmList = new RealmList<>();
         dtoReportList.setReportIdentifier(autoIncrementIdReport());
-        for (DtoAnswer dtoAnswer : dtoReportList.getAnswers()){
-            dtoAnswer.setIdAnswer(autoIncrementIdAnswer());
-            dtoAnswer.setReportIdentifier(dtoReportList.getReportIdentifier());
-        }
         realm.beginTransaction();
         realm.insertOrUpdate(dtoReportList);
         realm.commitTransaction();
         return resp;
+    }
+
+    public void insertAnswersRealm(DtoReport dtoReport, RealmList<DtoAnswer> dtoAnswers) {
+        for (DtoAnswer dtoAnswer : dtoAnswers){
+            dtoAnswer.setIdAnswer(autoIncrementIdAnswer());
+            dtoAnswer.setReportIdentifier(dtoReport.getReportIdentifier());
+        }
+        realm.beginTransaction();
+        dtoReport.getAnswers().addAll(dtoAnswers);
+        realm.insertOrUpdate(dtoReport);
+        realm.commitTransaction();
     }
 
 

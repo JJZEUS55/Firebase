@@ -46,15 +46,14 @@ public class DaoAnswer {
         return dtoAnswerList;
     }
 
-    public int insertRealm(List<DtoAnswer> dtoAnswers) {
+    public int insertRealm(long id, List<DtoAnswer> dtoAnswers) {
         int resp = 0;
-        RealmList<DtoAnswer> dtoAnswerRealmList = new RealmList<>();
         for (DtoAnswer dtoAnswer: dtoAnswers) {
             dtoAnswer.setIdAnswer(autoIncrementId());
+            dtoAnswer.setReportIdentifier(id);
         }
         realm.beginTransaction();
-        dtoAnswerRealmList.addAll(dtoAnswers);
-        realm.insertOrUpdate(dtoAnswerRealmList);
+        realm.insertOrUpdate(dtoAnswers);
         realm.commitTransaction();
         return resp;
     }

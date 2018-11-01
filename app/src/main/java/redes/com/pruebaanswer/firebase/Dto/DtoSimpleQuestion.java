@@ -6,6 +6,7 @@ public class DtoSimpleQuestion {
 
     private String id_question;
     private String id_secction;
+    private String id_parent;
     private String id_type;
     private String length;
     private String description;

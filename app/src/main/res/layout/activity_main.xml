@@ -30,10 +30,16 @@
         android:text="CHECKIN" />
 
     <Button
+        android:id="@+id/btn_checkout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CHECKOUT" />
+
+    <Button
         android:id="@+id/btn_firebase"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ENVIAR" />
+        android:text="RESPUESTAS" />
 
 
     <Button
